@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">🌿 EcoTrack AI</div>
+    </nav>
+
+    <main class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="glass-panel">
+            <header class="section-header">
+                <h1>Calculate Your Footprint</h1>
+                <p>Discover your impact on the environment with our AI-powered analyzer.</p>
+            </header>
+
+            <form id="carbon-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="carDistance">Car Distance (km/month)</label>
+                        <input type="number" id="carDistance" value="1000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="publicTransport">Public Transport (km/month)</label>
+                        <input type="number" id="publicTransport" value="200" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="flightHours">Flight Hours (yearly)</label>
+                        <input type="number" id="flightHours" value="10" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="electricity">Electricity (kWh/month)</label>
+                        <input type="number" id="electricity" value="300" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="acUsage">AC Usage (hours/day)</label>
+                        <input type="number" id="acUsage" value="4" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="dietType">Diet Type</label>
+                        <select id="dietType">
+                            <option value="meat-heavy">Meat Heavy</option>
+                            <option value="mixed" selected>Mixed</option>
+                            <option value="pescatarian">Pescatarian</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="wasteKg">Waste (kg/week)</label>
+                        <input type="number" id="wasteKg" value="15" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="recyclingHabit">Recycling Habit</label>
+                        <select id="recyclingHabit">
+                            <option value="never">Never</option>
+                            <option value="rarely">Rarely</option>
+                            <option value="sometimes" selected>Sometimes</option>
+                            <option value="always">Always</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Analyze Footprint</button>
+            </form>
+
+            <div id="results-container" class="hidden">
+                <div class="score-card">
+                    <h2>Eco Score</h2>
+                    <div class="score-circle">
+                        <span id="overall-score">0</span>
+                    </div>
+                    <p id="total-emissions">Total: 0 kg CO2/year</p>
+                </div>
+                <div class="breakdown-grid" id="breakdown-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ai-section" class="glass-panel">
+            <header class="section-header">
+                <h1>AI Sustainability Coach</h1>
+                <p>Ask for personalized tips to reduce your footprint.</p>
+            </header>
+            <div class="chat-container">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message assistant">
+                        <div class="bubble">Hello! I'm your EcoTrack AI coach. Once you calculate your footprint, I can give you personalized advice!</div>
+                    </div>
+                </div>
+                <form id="chat-form" class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Ask for sustainability tips..." required autocomplete="off">
+                    <button type="submit" class="btn-primary btn-icon">➤</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Challenges Section -->
+        <section id="challenges-section" class="glass-panel">
+            <header class="section-header">
+                <h1>Eco Challenges</h1>
+                <p>Complete challenges to lower your emissions and build green habits.</p>
+            </header>
+            <div id="challenges-grid" class="challenges-grid">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/main.js"></script>
+</body>
+</html>

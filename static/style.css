@@ -1,0 +1,406 @@
+:root {
+    --bg-dark: #0f172a;
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #3b82f6;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Animated Blobs */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: float 20s infinite alternate;
+}
+
+.blob1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: var(--primary);
+    animation-delay: 0s;
+}
+
+.blob2 {
+    bottom: -10%;
+    right: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: var(--accent);
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10vw, 10vh) scale(1.1); }
+}
+
+/* Navbar */
+.navbar {
+    padding: 1.5rem 2rem;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #34d399, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media(min-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr 1fr;
+    }
+    #challenges-section {
+        grid-column: 1 / -1;
+    }
+}
+
+/* Glass Panels */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 2rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+}
+
+/* Forms */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media(max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+input, select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+    color: white;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Results */
+.hidden { display: none !important; }
+
+#results-container {
+    margin-top: 2rem;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.score-card {
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary) 0%, transparent 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto;
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: relative;
+    transition: all 1s ease-out;
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    background: var(--glass-bg);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.breakdown-item {
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-radius: 0.8rem;
+    text-align: center;
+}
+
+.breakdown-item h3 {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+}
+
+.breakdown-item .value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Chat */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message {
+    display: flex;
+    max-width: 80%;
+}
+
+.message.user { align-self: flex-end; }
+.message.assistant { align-self: flex-start; }
+
+.bubble {
+    padding: 1rem;
+    border-radius: 1rem;
+    line-height: 1.5;
+}
+
+.message.user .bubble {
+    background: var(--primary);
+    border-bottom-right-radius: 0;
+}
+
+.message.assistant .bubble {
+    background: rgba(255,255,255,0.1);
+    border-bottom-left-radius: 0;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 1rem;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.3);
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.btn-icon {
+    width: 3rem;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Challenges */
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.challenge-card {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.challenge-card.completed {
+    opacity: 0.6;
+    border-color: var(--text-muted);
+}
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.badge {
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge.easy { background: rgba(16, 185, 129, 0.2); color: var(--primary); }
+.badge.medium { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+.badge.hard { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+.points {
+    font-weight: 800;
+    color: var(--accent);
+}
+
+.challenge-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-complete {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.btn-complete:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-complete:disabled {
+    background: rgba(255,255,255,0.1);
+    border-color: transparent;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* Markdown Styles in Chat */
+.bubble h3 { font-size: 1.1rem; margin: 0.5rem 0; }
+.bubble ul, .bubble ol { margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+.bubble p { margin-bottom: 0.5rem; }
+.bubble p:last-child { margin-bottom: 0; }
